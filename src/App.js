@@ -6,10 +6,11 @@ import TextForm from "./components/TextForm";
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Routes,
+  Route
 } from "react-router-dom"
 import About from "./components/About";
+import Home from "./components/Home";
 
 
 function App() {
@@ -43,18 +44,12 @@ function App() {
   return (
     <>
       <Router>
-        <Navbar title="myTextUtils" about="About Us" mode={mode} modechange={toggleMode} />
+        <Navbar title={"myTextUtils"} about={"About Us"} mode={mode} modechange={toggleMode} />
         <Alerts alertMsg={alert} />
-        <Switch>
-          <Route path="/home">
-            <div className="container mt-4 mb-2">
-              <TextForm heading="Write your text here" bodymode={mode} showAlert={showAlert} />
-            </div>
-          </Route>
-          <Route path="/about">
-            <About mode={mode} />
-          </Route>
-        </Switch>
+        <Routes>
+          <Route exact path="/home" element={<Home mode={mode} showAlert={showAlert}/>}/>
+          <Route exact path="/about" element={<About mode={mode} />}/>
+        </Routes>
       </Router>
     </>
   );
